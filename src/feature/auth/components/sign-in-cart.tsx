@@ -39,6 +39,9 @@ const SignInCart = () => {
                         Continue with Github
                 </Button>
             </div>
+            <p className="text-xs text-muted-foreground text-center">
+                Don't have an account? <span className="text-sky-700 hover:underline">Sign up</span>
+            </p>
         </CardContent>
     </Card>
   )
