@@ -1,8 +1,11 @@
+import { Card } from "@/components/ui/card"
 
 
 const SignInCart = () => {
   return (
-    <div>SignInCart</div>
+    <Card className="w-full h-full p-8">
+        Sing In
+    </Card>
   )
 }
 

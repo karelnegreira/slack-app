@@ -1,9 +1,9 @@
 
 
-const SignInCart = () => {
+const SignUpCart = () => {
   return (
     <div>SignOutCart</div>
   )
 }
 
-export default SignInCart
+export default SignUpCart
