@@ -5,9 +5,13 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
 import { FaGithub } from "react-icons/fa"
+import { SignInFlow } from "../types"
 
+interface SignInCardProps {
+    setState: (state: SignInFlow) => void;
+}
 
-const SignInCart = () => {
+const SignInCart = ({setState}: SignInCardProps) => {
   return (
     <Card className="w-full h-full p-8">
         <CardHeader className="px-0 pt-0">
@@ -40,7 +44,7 @@ const SignInCart = () => {
                 </Button>
             </div>
             <p className="text-xs text-muted-foreground text-center">
-                Don't have an account? <span className="text-sky-700 hover:underline">Sign up</span>
+                Don't have an account? <span onClick={() => setState("signUp")} className="text-sky-700 hover:underline cursor-pointer">Sign up</span>
             </p>
         </CardContent>
     </Card>
