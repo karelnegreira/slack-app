@@ -48,7 +48,7 @@ const SignInCart = ({setState}: SignInCardProps) => {
             <Separator />
             <div className="flex flex-col gap-y-2">
                 
-                <Button disabled={false} onClick={() => {}} variant="outline" size="lg"  className="w-full relative">
+                <Button disabled={false} onClick={() => onProvider("google")} variant="outline" size="lg"  className="w-full relative">
                     <FcGoogle className="size-5 absolute top-2.5 left-2.5"/>
                         Continue with Google
                 </Button>
