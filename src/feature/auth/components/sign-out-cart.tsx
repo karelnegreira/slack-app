@@ -16,6 +16,7 @@ interface SignUpProps {
 }
 
 const SignUpCart = ({setState}: SignUpProps) => {
+    const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
@@ -33,7 +34,7 @@ const SignUpCart = ({setState}: SignUpProps) => {
         }
 
         setPending(true);
-        signIn("password", {email, password, flow: "signUp"})
+        signIn("password", {name, email, password, flow: "signUp"})
             .catch(() => {
                 setError("Something went wrong")
             })
@@ -68,6 +69,7 @@ const SignUpCart = ({setState}: SignUpProps) => {
         )}
         <CardContent className="space-y-5 px-0 pb-0">
             <form onSubmit={onPasswordSignUp} className="space-y-2.5">
+            <Input disabled={pending} value={name} onChange={(e) => setName(e.target.value)} placeholder="Full name" required />
                 <Input disabled={pending} value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" type="email" required />
                 <Input disabled={pending} value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" type="password" required />
                 <Input disabled={pending} value={confirmPassword} onChange={(e) => {setConfirmPassword(e.target.value)}} placeholder="Confirm password" type="password" required />
