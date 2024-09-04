@@ -1,11 +1,14 @@
 "use client";
 
 import { UserButton } from "@/feature/auth/components/user-button";
+import { useCreateWorkspaceModal } from "@/feature/workspaces/store/use-create-workspace-modal";
 import { useGetworkspaces } from "@/feature/workspaces/api/use-get-workspaces";
 import { useEffect, useMemo } from "react";
 
 
 export default function Home() {
+
+  const [open, setOpen] = useCreateWorkspaceModal();
 
   const {data, isLoading } = useGetworkspaces();
 
@@ -16,10 +19,10 @@ export default function Home() {
 
     if (workspacesId) {
       console.log("Redirect to workspaces")
-    } else {
-      console.log("Open creation model")
+    } else if (!open) {
+      setOpen(true);
     }
-  }, [workspacesId, isLoading]);
+  }, [workspacesId, isLoading, open, setOpen]);
   
   return (
     <div>
