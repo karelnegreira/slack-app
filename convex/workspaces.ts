@@ -1,6 +1,19 @@
-import { query } from "./_generated/server";
+import { v } from "convex/values";
+import { mutation, query } from "./_generated/server";
+import { auth } from "./auth";
 
+export const create = mutation({
+    args: {
+        name: v.string(), 
+    }, 
+    handler: async (ctx, args) =>  {
+        const userId = await auth.getUserId(ctx);
 
+        if (!userId) {
+            throw new Error("Unauthorized");
+        }
+    }, 
+});
 
 export const get = query({
     args: {}, 
