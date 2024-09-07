@@ -9,7 +9,7 @@ import {
     DialogTrigger,
   } from "@/components/ui/dialog"
 import { useCreateWorkspaceModal } from "../store/use-create-workspace-modal"
-
+import {toast} from 'sonner';
 import { Input } from "@/components/ui/input";
 import { Button  } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
