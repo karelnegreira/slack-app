@@ -14,10 +14,12 @@ import { Input } from "@/components/ui/input";
 import { Button  } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { useCreateWorkspace } from "../api/use-create-workspaces";
+import { useState } from "react";
 
   
   export const CreateWorkspaceModal = () => {
     const [open, setOpen] = useCreateWorkspaceModal();
+    const [name, setName] = useState("");
     const router = useRouter();
 
     const { mutate, isPending, isError, isSuccess, data, error } = useCreateWorkspace();
@@ -27,23 +29,15 @@ import { useCreateWorkspace } from "../api/use-create-workspaces";
         //TODO clear form
     }
 
-    const handleSubmit = async () => {
-        try {
-            const data = await mutate({
-                name: "Workspace 1"
-            }, {
-                onSuccess(data) {
-    
-                }, 
-                onError(error) {
-    
-                }
-            })
-           
-        } catch (error) {
-            
-        }
-    }  
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        mutate ({name}, {
+            onSuccess(data) {
+                console.log(data)
+            }
+        })
+        
+    }; 
 
     return (
         <Dialog open={open} onOpenChange={handleClose}>
@@ -53,15 +47,16 @@ import { useCreateWorkspace } from "../api/use-create-workspaces";
                 </DialogHeader>
                 <form className="space-y-4" >
                     <Input 
-                        value="" 
-                        disabled={false} 
+                        value={name} 
+                        onChange={(e) => setName(e.target.value)}
+                        disabled={isPending} 
                         required
                         autoFocus
                         minLength={3}
                         placeholder="Workspace name e.g. 'Work', 'Personal', 'Home'"
                 />
                 <div className="flex justify-end">
-                    <Button disabled={false}>
+                    <Button disabled={isPending}>
                         Create
                     </Button>
                 </div>
