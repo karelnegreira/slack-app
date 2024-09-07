@@ -26,14 +26,16 @@ import { useState } from "react";
 
     const handleClose = () => {
         setOpen(false);
+        setName("");
         //TODO clear form
     }
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         mutate ({name}, {
-            onSuccess(data) {
-                console.log(data)
+            onSuccess(id) {
+                router.push(`/workspace/${id}`)
+                handleClose();
             }
         })
         
