@@ -34,6 +34,7 @@ import { useState } from "react";
         e.preventDefault();
         mutate ({name}, {
             onSuccess(id) {
+                toast.success("Workspace created");
                 router.push(`/workspace/${id}`)
                 handleClose();
             }
