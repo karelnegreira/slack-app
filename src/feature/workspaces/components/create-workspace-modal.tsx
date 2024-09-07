@@ -45,7 +45,7 @@ import { useState } from "react";
                 <DialogHeader>
                     <DialogTitle>Add a workspace</DialogTitle>
                 </DialogHeader>
-                <form className="space-y-4" >
+                <form  onSubmit={handleSubmit} className="space-y-4" >
                     <Input 
                         value={name} 
                         onChange={(e) => setName(e.target.value)}
