@@ -1,3 +1,6 @@
+"use client";
+
+import { useWorkspaceId } from "@/hooks/use-workspace-id";
 
 interface WorkspaceIdPageProps {
     params: {
@@ -6,9 +9,10 @@ interface WorkspaceIdPageProps {
 };
 
 const WorkspaceIdPage = ({params}: WorkspaceIdPageProps) => {
+    const workspaceId = useWorkspaceId();
     return (
         <div>
-            ID: {params.workspaceId} 
+            ID: {workspaceId} 
         </div>
     );
 }
