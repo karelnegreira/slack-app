@@ -1,4 +1,4 @@
-"use client";
+
 
 import {
     Dialog,
@@ -8,12 +8,12 @@ import {
     DialogTitle,
     DialogTrigger,
   } from "@/components/ui/dialog"
-import { useCreateWorkspaceModal } from "../store/use-create-workspace-modal"
+import { useCreateWorkspaceModal } from "../store/use-create-workspace-modal"; 
 import {toast} from 'sonner';
 import { Input } from "@/components/ui/input";
 import { Button  } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
-import { useCreateWorkspace } from "../api/use-create-workspaces";
+import { useCreateWorkspace } from "../api/use-create-workspace";
 import { useState } from "react";
 
   
@@ -22,7 +22,7 @@ import { useState } from "react";
     const [name, setName] = useState("");
     const router = useRouter();
 
-    const { mutate, isPending, isError, isSuccess, data, error } = useCreateWorkspace();
+    const { mutate, isPending } = useCreateWorkspace();
 
     const handleClose = () => {
         setOpen(false);
