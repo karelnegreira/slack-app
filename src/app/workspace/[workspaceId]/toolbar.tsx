@@ -2,7 +2,9 @@
 
 const Toolbar = () => {
   return (
-    <div className="bg-red-700">Toolbar</div>
+    <nav className="bg-[#481349]">
+        Toolbar
+    </nav>
   )
 }
 
