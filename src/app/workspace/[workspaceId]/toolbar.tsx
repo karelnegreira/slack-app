@@ -1,4 +1,4 @@
-"use client";
+
 
 import { Button } from "@/components/ui/button"
 import { useGetworkspace } from "@/feature/workspaces/api/use-get-workspace";
@@ -6,7 +6,7 @@ import { useWorkspaceId } from "@/hooks/use-workspace-id"
 import { Info, Search } from "lucide-react"
 
 
-const Toolbar = () => {
+export const Toolbar = () => {
     const workspaceId = useWorkspaceId();
     const { data } = useGetworkspace({id: workspaceId}); 
 
@@ -30,5 +30,3 @@ const Toolbar = () => {
     </nav>
   )
 }
-
-export default Toolbar

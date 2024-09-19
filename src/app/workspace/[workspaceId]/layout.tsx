@@ -1,4 +1,6 @@
-import Toolbar from "./toolbar";
+"use client";
+
+import { Toolbar } from './toolbar';
 
 
 interface WorkspaceIdLayoutProps {
