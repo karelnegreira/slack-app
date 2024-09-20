@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button'
 import { useGetworkspace } from '@/feature/workspaces/api/use-get-workspace'
 import { useGetworkspaces } from '@/feature/workspaces/api/use-get-workspaces'
 import { useWorkspaceId } from '@/hooks/use-workspace-id'
-
+import { useCreateWorkspaceModal } from '@/feature/workspaces/store/use-create-workspace-modal'
 import {
     DropdownMenu, 
     DropdownMenuContent, 
@@ -11,11 +11,13 @@ import {
     DropdownMenuSeparator, 
     DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
-import { useCreateWorkspaceModal } from '@/feature/workspaces/store/use-create-workspace-modal'
-import { Loader } from 'lucide-react'
+
+import { Loader, Plus } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 
 
 export const WorkspacesSwitcher = () => {
+    const router = useRouter();
     const workspaceId = useWorkspaceId();
     const [_open, setOpen] = useCreateWorkspaceModal();
 
@@ -23,8 +25,6 @@ export const WorkspacesSwitcher = () => {
     const {data: workspace, isLoading: workspaceLoading } = useGetworkspace({id: workspaceId});
 
     const filteredWorkspaces = workspaces?.filter( (workspace) => workspace?._id !== workspaceId);
-
-
 
     return (
         <DropdownMenu>
@@ -36,11 +36,31 @@ export const WorkspacesSwitcher = () => {
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent side="bottom" align="start" className="w-64">
-                <DropdownMenuItem className="cursor-pointer flex-col justify-center items-start capitalize">
+                <DropdownMenuItem 
+                    onClick={() => router.push(`/workspace/${workspaceId}`)}
+                    className="cursor-pointer flex-col justify-center items-start capitalize">
                     {workspace?.name}
-                    <span>
+                    <span className="text-xs text-muted-foreground">
                         Active workspace
                     </span>
+                </DropdownMenuItem>
+                {
+                    filteredWorkspaces?.map((workspace) => (
+                        <DropdownMenuItem
+                            key={workspace._id}
+                            className="cursor-pointer capitalize"
+                            onClick={() => router.push(`/workspace/${workspace._id}`)}
+
+                        >
+                            
+                        </DropdownMenuItem>
+                    ))
+                }
+                <DropdownMenuItem>
+                    <div className="size-9 relative overflow-hidden bg-[#f2f2f2] text-slate-800 font-semibold text-lg rounded-md flex items-center justify-center mr-2">
+                        <Plus />
+                    </div>
+                    Create a new workspace
                 </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>
