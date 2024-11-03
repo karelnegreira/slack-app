@@ -18,7 +18,7 @@ const WorkspaceIdLayout = ({children}: WorkspaceIdLayoutProps) => {
         <div className="flex h-[calc(100vh-40px)]">
           <Sidebar />
           <ResizablePanelGroup direction="horizontal">
-            <ResizablePanel>
+            <ResizablePanel defaultSize={20} minSize={11} className="bg-[#5E2C5F]">
               <div>
                 Channels Sidebar
               </div>
