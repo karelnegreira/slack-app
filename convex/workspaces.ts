@@ -4,6 +4,16 @@ import { auth } from "./auth";
 
 import { getAuthUserId } from "@convex-dev/auth/server";
 
+const generateCode = () => {
+    const code = Array.from(
+        {length: 6}, 
+        () => 
+            "0123456789abcdefghijklmnopqrstuvwxyz"[Math.floor(Math.random() * 36)]
+        
+    ).join("");
+
+    return code;
+}
 
 export const create = mutation({
     args: {
@@ -16,7 +26,7 @@ export const create = mutation({
             throw new Error("Unauthorized");
         }
         //TODO: create a proper method
-        const joinCode = "123456";
+        const joinCode = generateCode();
 
         const workspaceId = await ctx.db.insert("workspaces", {
             name: args.name, 
