@@ -4,6 +4,7 @@ import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@/componen
 
 import Sidebar from './sidebar';
 import { Toolbar } from './toolbar';
+import WorkspaceSidebar from './workspace-sidebar';
 
 
 
@@ -17,14 +18,15 @@ const WorkspaceIdLayout = ({children}: WorkspaceIdLayoutProps) => {
         <Toolbar />
         <div className="flex h-[calc(100vh-40px)]">
           <Sidebar />
-          <ResizablePanelGroup direction="horizontal">
+          <ResizablePanelGroup direction="horizontal" autoSaveId="ca-workspace-layout">
             <ResizablePanel defaultSize={20} minSize={11} className="bg-[#5E2C5F]">
               <div>
                 Channels Sidebar
               </div>
             </ResizablePanel>
+            <WorkspaceSidebar />
             <ResizableHandle withHandle/>
-            <ResizablePanel>
+            <ResizablePanel minSize={20}>
                 {children}
             </ResizablePanel>
           </ResizablePanelGroup>
