@@ -1,4 +1,4 @@
-import { ChevronDown, SquarePen } from "lucide-react";
+import { ChevronDown, ListFilter, SquarePen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
     DropdownMenu, 
@@ -70,7 +70,10 @@ const WorkspaceHeader = ({workspace, isAdmin} : WorksHeaderProps) => {
         </DropdownMenu>
         <div className="flex items-center gap-0.5">
             <Button variant="transparent" size="iconSm">
-                <SquarePen/>
+                <ListFilter className="size-4"/>
+            </Button>
+            <Button variant="transparent" size="iconSm">
+                <SquarePen className="size-4"/>
             </Button>
         </div>
     </div>
