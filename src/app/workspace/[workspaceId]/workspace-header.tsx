@@ -1,4 +1,4 @@
-
+import { ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
     DropdownMenu, 
@@ -7,7 +7,9 @@ import {
     DropdownMenuSeparator, 
     DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
+
 import { Doc } from "../../../../convex/_generated/dataModel";
+
 
 interface WorksHeaderProps  {
     workspace: Doc<"workspaces">;
@@ -19,7 +21,8 @@ const WorkspaceHeader = ({workspace} : WorksHeaderProps) => {
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
                 <Button variant="transparent" className="font-semibold text-lg w-auto p-1.5 overflow-hidden" size="sm">
-                    <span>{workspace?.name}</span>
+                    <span className="truncate">{workspace.name}</span>
+                    <ChevronDown className="size-4 ml-1 shrink-0"/>
                 </Button>
             </DropdownMenuTrigger>
         </DropdownMenu>
