@@ -25,6 +25,9 @@ const WorkspaceHeader = ({workspace} : WorksHeaderProps) => {
                     <ChevronDown className="size-4 ml-1 shrink-0"/>
                 </Button>
             </DropdownMenuTrigger>
+            <DropdownMenuContent side="bottom" align="start" className="w-64">
+                
+            </DropdownMenuContent>
         </DropdownMenu>
     </div>
   )
