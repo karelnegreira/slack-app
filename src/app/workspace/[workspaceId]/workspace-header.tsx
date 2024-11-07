@@ -53,6 +53,12 @@ const WorkspaceHeader = ({workspace} : WorksHeaderProps) => {
                     onClick={() => {}}>
                         Invite people to {workspace.name}
                 </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem 
+                    className="cursor-pointer py-2" 
+                    onClick={() => {}}>
+                        Preferences
+                </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>
     </div>
