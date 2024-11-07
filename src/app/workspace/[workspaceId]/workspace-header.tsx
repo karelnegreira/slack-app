@@ -1,4 +1,4 @@
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, SquarePen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
     DropdownMenu, 
@@ -48,20 +48,31 @@ const WorkspaceHeader = ({workspace, isAdmin} : WorksHeaderProps) => {
                         <p className="text-xs text-muted-foreground">Active workspace</p>
                     </div>
                 </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem 
-                    className="cursor-pointer py-2" 
-                    onClick={() => {}}>
-                        Invite people to {workspace.name}
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem 
-                    className="cursor-pointer py-2" 
-                    onClick={() => {}}>
-                        Preferences
-                </DropdownMenuItem>
+                {isAdmin && (
+                    <>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem 
+                        className="cursor-pointer py-2" 
+                        onClick={() => {}}>
+                            Invite people to {workspace.name}
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem 
+                        className="cursor-pointer py-2" 
+                        onClick={() => {}}>
+                            Preferences
+                    </DropdownMenuItem>
+                    </>
+                )
+                }
+                
             </DropdownMenuContent>
         </DropdownMenu>
+        <div className="flex items-center gap-0.5">
+            <Button variant="transparent" size="iconSm">
+                <SquarePen/>
+            </Button>
+        </div>
     </div>
   )
 }
