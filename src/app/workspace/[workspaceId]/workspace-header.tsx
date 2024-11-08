@@ -20,6 +20,7 @@ interface WorksHeaderProps  {
 
 const WorkspaceHeader = ({workspace, isAdmin} : WorksHeaderProps) => {
   return (
+    <>
     <div className="flex items-center justify-between px-4 h-[49px] gap-0.5">
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -71,18 +72,19 @@ const WorkspaceHeader = ({workspace, isAdmin} : WorksHeaderProps) => {
             </DropdownMenuContent>
         </DropdownMenu>
         <div className="flex items-center gap-0.5">
-            <Hint label="Filter" side="bottom">
+            <Hint label="Filter" side="bottom" align="center">
                 <Button variant="transparent" size="iconSm">
                     <ListFilter className="size-4"/>
                 </Button>
             </Hint>
-               <Hint label="new message" side="bottom">
+               <Hint label="new message" side="bottom" align="center">
                     <Button variant="transparent" size="iconSm">
                         <SquarePen className="size-4"/>
                     </Button>
                 </Hint>
         </div>
     </div>
+    </>
   )
 }
 
