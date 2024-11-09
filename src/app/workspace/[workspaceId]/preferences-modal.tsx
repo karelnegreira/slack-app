@@ -8,6 +8,7 @@ import {
     DialogClose, 
     DialogFooter, 
 } from '@/components/ui/dialog';
+import { useUpdateWorkspace } from '@/feature/workspaces/api/use-update-workspace';
 import { TrashIcon } from 'lucide-react';
 import { useState } from 'react';
 
@@ -19,6 +20,8 @@ interface PreferenceModalProps {
 
 export const PreferencesModal = ({open, setOpen, initialValue} : PreferenceModalProps) => {
     const [value, setValue] = useState(initialValue);
+    const {mutate: updateWorkspace, isPending: isUpdatingWorkspace} = useUpdateWorkspace();
+
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogContent className="p-0 bg-gray-50 overflow-hidden">
