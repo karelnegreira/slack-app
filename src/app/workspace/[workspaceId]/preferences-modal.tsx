@@ -8,6 +8,7 @@ import {
     DialogClose, 
     DialogFooter, 
 } from '@/components/ui/dialog';
+import { TrashIcon } from 'lucide-react';
 import { useState } from 'react';
 
 interface PreferenceModalProps {
@@ -32,8 +33,22 @@ export const PreferencesModal = ({open, setOpen, initialValue} : PreferenceModal
                             <p className="text-sm font-semibold">
                                 Workspace name
                             </p>
+                            <p className="text-sm text-[#1264a3]">
+                                Edit
+                            </p>
                         </div>
+                        <p className="text-sm">
+                            {value}
+                        </p>
                     </div>
+                    <button 
+                        disabled={false} 
+                        onClick={() => {}}
+                        className="flex items-center gap-x-2 px-5 py-4 bg-white rounded-lg border cursor-pointer hover:bg-gray-50 text-rose-600"
+                    >
+                        <TrashIcon className="size-4" />
+                        <p className="text-sm font-semibold">Delete workspace</p>
+                    </button>
                 </div>
             </DialogContent>
         </Dialog>
