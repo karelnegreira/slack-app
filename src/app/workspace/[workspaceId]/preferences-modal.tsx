@@ -16,6 +16,9 @@ import { TrashIcon } from 'lucide-react';
 import { useState } from 'react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { useWorkspaceId } from '@/hooks/use-workspace-id';
+import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
 
 interface PreferenceModalProps {
     open: boolean;
@@ -24,12 +27,45 @@ interface PreferenceModalProps {
 }
 
 export const PreferencesModal = ({open, setOpen, initialValue} : PreferenceModalProps) => {
-    
+    const workspaceId = useWorkspaceId();
+    const router = useRouter();
+
     const [value, setValue] = useState(initialValue);
     const [editOpen, setEditOpen] = useState(false);
 
     const {mutate: updateWorkspace, isPending: isUpdatingWorkspace} = useUpdateWorkspace();
     const {mutate: removeWorkspace, isPending: isRemovingWorkspace} = useRemoveWorkspace();
+
+    const handleRemove = () => {
+        removeWorkspace({
+            id: workspaceId
+        }, {
+            onSuccess: () => {
+                toast.success("Workspace removed");
+                router.replace("/");
+            }, 
+            onError: () => {
+                toast.error("Failed to remove the workspace")
+            }
+        })
+    }
+
+    const handleEdit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        updateWorkspace({
+            id: workspaceId, 
+            name: value, 
+        }, {
+            onSuccess: () => {
+                toast.success("Workspace updated");
+                setEditOpen(false);
+            }, 
+            onError: () => {
+                toast.error("Failed to update the workspace")
+            }
+        })
+    }
 
     return (
         <Dialog open={open} onOpenChange={setOpen}>
@@ -60,7 +96,7 @@ export const PreferencesModal = ({open, setOpen, initialValue} : PreferenceModal
                             <DialogHeader>
                                 <DialogTitle>Rename this workspace</DialogTitle>
                             </DialogHeader>
-                            <form className="space-y-4" onSubmit={() => {}}>
+                            <form className="space-y-4" onSubmit={handleEdit}>
                                 <Input 
                                     value={value} 
                                     disabled={isUpdatingWorkspace} 
@@ -73,17 +109,18 @@ export const PreferencesModal = ({open, setOpen, initialValue} : PreferenceModal
                                 />
                                 <DialogFooter>
                                     <DialogClose asChild>
-                                        <Button>
+                                        <Button variant="outline" disabled={isUpdatingWorkspace}>
                                             Cancel
                                         </Button>
                                     </DialogClose>
+                                    <Button disabled={isUpdatingWorkspace}>Save</Button>
                                 </DialogFooter>
                             </form>
                         </DialogContent>
                     </Dialog>
                     <button 
-                        disabled={false} 
-                        onClick={() => {}}
+                        disabled={isRemovingWorkspace} 
+                        onClick={handleRemove}
                         className="flex items-center gap-x-2 px-5 py-4 bg-white rounded-lg border cursor-pointer hover:bg-gray-50 text-rose-600"
                     >
                         <TrashIcon className="size-4" />
