@@ -24,6 +24,31 @@ export const useConfirm = (
     const handleClose = () => {
         setPromise(null);
     }
-    
+
+    const handleConfirm = () => {
+        promise?.resolve(true);
+        handleClose();
+    }
+
+    const handleCancel = () => {
+        promise?.resolve(false);
+        handleClose();
+    }
+
+    const ConfirmDialog = () => {
+        <Dialog>
+            <DialogContent>
+                <DialogHeader>
+                    <DialogTitle>
+                        {title}
+                    </DialogTitle>
+                    <DialogDescription>
+                        {message}
+                    </DialogDescription>
+                </DialogHeader>
+            </DialogContent>
+        </Dialog>
+    }
+
     return ["", ""];
 }
