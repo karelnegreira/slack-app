@@ -14,7 +14,7 @@ export const useConfirm = (
     title: string, 
     message: string, 
 
-): [any, any] => {
+): [() => JSX.Element, () => Promise<unknown>] => {
     const [promise, setPromise] = useState<{resolve: (value: boolean) => void} | null>(null);
 
     const confirm = () => new Promise((resolve) => {
@@ -35,7 +35,7 @@ export const useConfirm = (
         handleClose();
     }
 
-    const ConfirmDialog = () => {
+    const ConfirmDialog = () => (
         <Dialog>
             <DialogContent>
                 <DialogHeader>
@@ -56,7 +56,7 @@ export const useConfirm = (
                 </DialogFooter>
             </DialogContent>
         </Dialog>
-    }
+    )
 
-    return ["", ""];
-}
+    return [ConfirmDialog, confirm];
+};
