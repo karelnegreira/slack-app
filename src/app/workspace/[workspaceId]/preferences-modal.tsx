@@ -32,7 +32,7 @@ export const PreferencesModal = ({open, setOpen, initialValue} : PreferenceModal
     const router = useRouter();
 
     const [ConfirmDialog, confirm] = useConfirm(
-        "What do you want to do?", 
+        "Are you sure?", 
         "This action is irreversible"
     )
 
@@ -42,7 +42,14 @@ export const PreferencesModal = ({open, setOpen, initialValue} : PreferenceModal
     const {mutate: updateWorkspace, isPending: isUpdatingWorkspace} = useUpdateWorkspace();
     const {mutate: removeWorkspace, isPending: isRemovingWorkspace} = useRemoveWorkspace();
 
-    const handleRemove = () => {
+    const handleRemove = async () => {
+        
+        const ok = await confirm();
+        
+        if (!ok) {
+            return;
+        }
+
         removeWorkspace({
             id: workspaceId
         }, {
@@ -126,14 +133,14 @@ export const PreferencesModal = ({open, setOpen, initialValue} : PreferenceModal
                                 </form>
                             </DialogContent>
                         </Dialog>
-                        <button 
+                        <Button 
                             disabled={isRemovingWorkspace} 
                             onClick={handleRemove}
                             className="flex items-center gap-x-2 px-5 py-4 bg-white rounded-lg border cursor-pointer hover:bg-gray-50 text-rose-600"
                         >
                             <TrashIcon className="size-4" />
                             <p className="text-sm font-semibold">Delete workspace</p>
-                        </button>
+                        </Button>
                     </div>
                 </DialogContent>
             </Dialog>

@@ -17,7 +17,7 @@ export const useConfirm = (
 ): [() => JSX.Element, () => Promise<unknown>] => {
     const [promise, setPromise] = useState<{resolve: (value: boolean) => void} | null>(null);
 
-    const confirm = () => new Promise((resolve) => {
+    const confirm = () => new Promise((resolve, reject) => {
         setPromise({ resolve });
     });
     
@@ -36,7 +36,7 @@ export const useConfirm = (
     }
 
     const ConfirmDialog = () => (
-        <Dialog>
+        <Dialog open={promise !== null}>
             <DialogContent>
                 <DialogHeader>
                     <DialogTitle>
