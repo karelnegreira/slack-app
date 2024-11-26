@@ -19,6 +19,12 @@ export const WorkspaceSection = ( { children, label, hint, onNew } : WorkspaceSe
                 >
                     < FaCaretDown className="size-4"/>
                 </Button>
+                <Button 
+                    variant="transparent"
+                    size="sm"
+                    className="group px-1.5 text-sm text-[#f9edffcc] h-[28px] justify-start overflow-hidden items-center">
+                    <span>{label}</span>
+                </Button>
             </div>
             {children}
         </div>
