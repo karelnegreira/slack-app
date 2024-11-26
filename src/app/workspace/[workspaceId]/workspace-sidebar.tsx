@@ -1,9 +1,10 @@
 import { useCurrentMember } from "@/feature/members/api/use-current-member";
 import { useGetworkspace } from "@/feature/workspaces/api/use-get-workspace";
 import { useWorkspaceId } from "@/hooks/use-workspace-id"
-import { AlertTriangle, Loader, MessageSquareText, SendHorizonal } from "lucide-react";
+import { AlertTriangle, HashIcon, Loader, MessageSquareText, SendHorizonal } from "lucide-react";
 import WorkspaceHeader from "./workspace-header";
 import { SidebarItem } from "./sidebar-item";
+import { useGetChannels } from "@/feature/channels/api/use-get-channels";
 
 
 const WorkspaceSidebar = () => {
@@ -11,6 +12,7 @@ const WorkspaceSidebar = () => {
 
     const {data: member, isLoading: memberLoading} = useCurrentMember({ workspaceId });
     const {data: workspace, isLoading: workspaceLoading} = useGetworkspace({ id: workspaceId });
+    const {data: channels, isLoading: channelsLoading} = useGetChannels({workspaceId})
 
     if (workspaceLoading || memberLoading) {
         return (
@@ -45,6 +47,16 @@ const WorkspaceSidebar = () => {
                 icon={SendHorizonal}
                 id="drafts"
             />
+            {
+                channels?.map((item) => (
+                    <SidebarItem
+                        key={item._id}
+                        icon={HashIcon}
+                        label={item.name}
+                        id={item._id}
+                    />
+                ))
+            }
         </div>
     </div>
   )
