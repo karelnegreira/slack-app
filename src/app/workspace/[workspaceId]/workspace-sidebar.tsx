@@ -5,6 +5,7 @@ import { AlertTriangle, HashIcon, Loader, MessageSquareText, SendHorizonal } fro
 import WorkspaceHeader from "./workspace-header";
 import { SidebarItem } from "./sidebar-item";
 import { useGetChannels } from "@/feature/channels/api/use-get-channels";
+import { WorkspaceSection } from "./workspace-section";
 
 
 const WorkspaceSidebar = () => {
@@ -47,16 +48,24 @@ const WorkspaceSidebar = () => {
                 icon={SendHorizonal}
                 id="drafts"
             />
-            {
-                channels?.map((item) => (
-                    <SidebarItem
-                        key={item._id}
-                        icon={HashIcon}
-                        label={item.name}
-                        id={item._id}
-                    />
-                ))
-            }
+            
+                <WorkspaceSection
+                    label="Channels"
+                    hint="New Channel"
+                    onNew={() => {}}
+                    
+                >
+                    {
+                        channels?.map((item) => (
+                            <SidebarItem
+                                key={item._id}
+                                icon={HashIcon}
+                                label={item.name}
+                                id={item._id}
+                            />
+                        ))
+                    }
+            </WorkspaceSection>
         </div>
     </div>
   )

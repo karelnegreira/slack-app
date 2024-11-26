@@ -1,0 +1,23 @@
+import { Button } from "@/components/ui/button";
+import { FaCaretDown } from "react-icons/fa";
+
+
+interface WorkspaceSectionProps {
+    children: React.ReactNode;
+    label: string;
+    hint: string;
+    onNew?: () => void;
+}
+
+export const WorkspaceSection = ( { children, label, hint, onNew } : WorkspaceSectionProps ) => {
+    return (
+        <div className="flex flex-col mt-3 px-2">
+            <div className="flex items-center px-3.5 group">
+                <Button>
+                    < FaCaretDown className="size-4"/>
+                </Button>
+            </div>
+            {children}
+        </div>
+    )
+}
