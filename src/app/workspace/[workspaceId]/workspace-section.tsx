@@ -1,3 +1,4 @@
+import { Hint } from "@/components/hint";
 import { Button } from "@/components/ui/button";
 import { FaCaretDown } from "react-icons/fa";
 
@@ -25,6 +26,21 @@ export const WorkspaceSection = ( { children, label, hint, onNew } : WorkspaceSe
                     className="group px-1.5 text-sm text-[#f9edffcc] h-[28px] justify-start overflow-hidden items-center">
                     <span>{label}</span>
                 </Button>
+                {
+                    onNew && 
+                    (
+                        <Hint label={hint} side="top" align="center">
+                            <Button 
+                                onClick={onNew}
+                                variant="transparent"
+                                size="iconSm"
+                                className="opacity-0 group-hover:opacity-100 transition-opacity ml-auto p-0.5 text-sm text-[#f9edffcc] size-6 shrink-0"
+                            >
+
+                            </Button>
+                        </Hint>   
+                    )
+                }
             </div>
             {children}
         </div>
