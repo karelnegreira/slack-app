@@ -48,6 +48,8 @@ const WorkspaceSidebar = () => {
                 icon={SendHorizonal}
                 id="drafts"
             />
+
+        </div>
             
             <WorkspaceSection
                     label="Channels"
@@ -66,7 +68,7 @@ const WorkspaceSidebar = () => {
                         ))
                     }
             </WorkspaceSection>
-        </div>
+       
     </div>
   )
 }
