@@ -49,12 +49,12 @@ const WorkspaceSidebar = () => {
                 id="drafts"
             />
             
-                <WorkspaceSection
+            <WorkspaceSection
                     label="Channels"
                     hint="New Channel"
                     onNew={() => {}}
                     
-                >
+            >
                     {
                         channels?.map((item) => (
                             <SidebarItem
