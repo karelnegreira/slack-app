@@ -8,7 +8,7 @@ interface UseGetMembersProps {
 }
 
 
-export const useCurrentMember = ({ workspaceId } : UseGetMembersProps) => {
+export const useGetMembers = ({ workspaceId } : UseGetMembersProps) => {
     
     const data = useQuery( api.members.get, { workspaceId } );
 

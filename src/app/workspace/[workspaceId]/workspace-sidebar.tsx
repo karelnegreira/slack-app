@@ -1,19 +1,25 @@
 import { useCurrentMember } from "@/feature/members/api/use-current-member";
 import { useGetworkspace } from "@/feature/workspaces/api/use-get-workspace";
 import { useWorkspaceId } from "@/hooks/use-workspace-id"
-import { AlertTriangle, HashIcon, Loader, MessageSquareText, SendHorizonal } from "lucide-react";
 import WorkspaceHeader from "./workspace-header";
 import { SidebarItem } from "./sidebar-item";
 import { useGetChannels } from "@/feature/channels/api/use-get-channels";
 import { WorkspaceSection } from "./workspace-section";
+import { useGetMembers } from '@/feature/members/api/use-current-members';
 
+import { AlertTriangle, HashIcon, Loader, MessageSquareText, SendHorizonal } from "lucide-react";
 
 const WorkspaceSidebar = () => {
+    
     const workspaceId = useWorkspaceId();
 
     const {data: member, isLoading: memberLoading} = useCurrentMember({ workspaceId });
+    
     const {data: workspace, isLoading: workspaceLoading} = useGetworkspace({ id: workspaceId });
+    
     const {data: channels, isLoading: channelsLoading} = useGetChannels({workspaceId})
+
+    const {data: members, isLoading: membersLoading } = useGetMembers({ workspaceId });
 
     if (workspaceLoading || memberLoading) {
         return (
@@ -68,7 +74,13 @@ const WorkspaceSidebar = () => {
                         ))
                     }
             </WorkspaceSection>
-       
+            {
+                members?.map((item) => (
+                    <div>
+                        {item.user.name}
+                    </div>
+                ))
+            }
     </div>
   )
 }
