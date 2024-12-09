@@ -75,6 +75,12 @@ const WorkspaceSidebar = () => {
                         ))
                     }
             </WorkspaceSection>
+            <WorkspaceSection
+                    label="Direct messages"
+                    hint="New direct messages"
+                    onNew={() => {}}
+                    
+            >
             {
                 members?.map((item) => (
                    <UserItem 
@@ -86,6 +92,7 @@ const WorkspaceSidebar = () => {
                    />
                 ))
             }
+            </WorkspaceSection>
     </div>
   )
 }
