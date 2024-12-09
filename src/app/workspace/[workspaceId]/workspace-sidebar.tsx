@@ -8,6 +8,7 @@ import { WorkspaceSection } from "./workspace-section";
 import { useGetMembers } from '@/feature/members/api/use-current-members';
 
 import { AlertTriangle, HashIcon, Loader, MessageSquareText, SendHorizonal } from "lucide-react";
+import { UserItem } from "./user-item";
 
 const WorkspaceSidebar = () => {
     
@@ -76,9 +77,13 @@ const WorkspaceSidebar = () => {
             </WorkspaceSection>
             {
                 members?.map((item) => (
-                    <div>
-                        {item.user.name}
-                    </div>
+                   <UserItem 
+                        key={item._id}
+                        id={item._id}
+                        label={item.user.name}
+                        image={item.user.image}
+                        
+                   />
                 ))
             }
     </div>
