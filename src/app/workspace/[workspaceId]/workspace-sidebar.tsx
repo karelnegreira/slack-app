@@ -9,17 +9,17 @@ import { useGetMembers } from '@/feature/members/api/use-current-members';
 
 import { AlertTriangle, HashIcon, Loader, MessageSquareText, SendHorizonal } from "lucide-react";
 import { UserItem } from "./user-item";
+import { useCreateChannelModal } from "@/feature/channels/store/use-create-channel-modal";
 
 const WorkspaceSidebar = () => {
     
     const workspaceId = useWorkspaceId();
 
-    const {data: member, isLoading: memberLoading} = useCurrentMember({ workspaceId });
-    
-    const {data: workspace, isLoading: workspaceLoading} = useGetworkspace({ id: workspaceId });
-    
-    const {data: channels, isLoading: channelsLoading} = useGetChannels({workspaceId})
+    const [_open, setOpen] = useCreateChannelModal();
 
+    const {data: member, isLoading: memberLoading} = useCurrentMember({ workspaceId });
+    const {data: workspace, isLoading: workspaceLoading} = useGetworkspace({ id: workspaceId });
+    const {data: channels, isLoading: channelsLoading} = useGetChannels({workspaceId})
     const {data: members, isLoading: membersLoading } = useGetMembers({ workspaceId });
 
     if (workspaceLoading || memberLoading) {
@@ -61,7 +61,7 @@ const WorkspaceSidebar = () => {
             <WorkspaceSection
                     label="Channels"
                     hint="New Channel"
-                    onNew={() => {}}
+                    onNew={() => setOpen(true)}
                     
             >
                     {

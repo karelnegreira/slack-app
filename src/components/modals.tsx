@@ -18,6 +18,7 @@ export const Modals = () => {
 
     return (
         <>
+            <CreateChannelModal/>
             <CreateWorkspaceModal />
         </>
     )
