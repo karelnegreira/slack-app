@@ -5,6 +5,7 @@ import {
     DialogHeader, 
     DialogTitle
 } from '@/components/ui/dialog';
+import { Input } from '@/components/ui/input';
 
 import { useCreateChannelModal } from '../store/use-create-channel-modal';
 
@@ -20,7 +21,20 @@ export const CreateChannelModal = () => {
                         Add a channel
                     </DialogTitle>
                 </DialogHeader>
+                <form className="space-y-4">
+                    <Input 
+                        value=""
+                        disabled={false}
+                        onChange={() => {}}
+                        required
+                        autoFocus
+                        minLength={3}
+                        maxLength={30}
+                        placeholder="e.g. plan-budget"
+                    />
+                </form>
             </DialogContent>
+
         </Dialog>
     )
 }
