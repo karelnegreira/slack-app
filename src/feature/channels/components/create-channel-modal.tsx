@@ -1,3 +1,4 @@
+import { Button } from '@/components/ui/button';
 import {
     Dialog, 
     DialogContent, 
@@ -32,6 +33,11 @@ export const CreateChannelModal = () => {
                         maxLength={30}
                         placeholder="e.g. plan-budget"
                     />
+                    <div className="flex justify-end">
+                        <Button disabled={false}>
+                            Create
+                        </Button>
+                    </div>
                 </form>
             </DialogContent>
 
