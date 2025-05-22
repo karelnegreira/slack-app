@@ -93,6 +93,11 @@ const WorkspaceSidebar = () => {
                 ))
             }
             </WorkspaceSection>
+            {members?.map((item) => (
+                <div>
+                    {item.user.name}
+                </div>
+            ))}
     </div>
   )
 }
