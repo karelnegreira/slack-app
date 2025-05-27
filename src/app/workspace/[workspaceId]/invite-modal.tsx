@@ -1,4 +1,7 @@
 
+import { Button } from '@/components/ui/button';
+import {CopyIcon} from 'lucide-react';
+
 import {
     Dialog, 
     DialogClose, 
@@ -29,6 +32,10 @@ export const InviteModal = ({open, setOpen, name, joinCode}: InviteModalProps) =
                     <p className="flex flex-col gap-y-4 items-center justify-center py-10 uppercase">
                         {joinCode}
                     </p>
+                    <Button>
+                        Copy link
+                        <CopyIcon />
+                    </Button>
                 </div>
             </DialogContent>
         </Dialog>
