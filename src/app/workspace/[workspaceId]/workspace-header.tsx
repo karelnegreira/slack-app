@@ -13,6 +13,7 @@ import {
 import { Doc } from "../../../../convex/_generated/dataModel";
 import { PreferencesModal } from "./preferences-modal";
 import { useState } from "react";
+import { InviteModal } from "./invite-modal";
 
 
 interface WorksHeaderProps  {
@@ -25,6 +26,7 @@ const WorkspaceHeader = ({workspace, isAdmin} : WorksHeaderProps) => {
 
   return (
     <>
+    <InviteModal />
     <PreferencesModal open={preferencesOpen} setOpen={setPreferencesOpen} initialValue={workspace.name}/>
         <div className="flex items-center justify-between px-4 h-[49px] gap-0.5">
             <DropdownMenu>
