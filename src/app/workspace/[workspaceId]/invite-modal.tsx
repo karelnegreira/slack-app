@@ -1,9 +1,28 @@
 
+import {
+    Dialog, 
+    DialogClose, 
+    DialogContent, 
+    DialogDescription, 
+    DialogHeader, 
+    DialogTitle
+} from '@/components/ui/dialog';
 
-export const InviteModal = () => {
+interface InviteModalProps {
+    open: boolean;
+    setOpen: (open: boolean) => void;
+    name: string;
+    joinCode: string;
+}
+
+export const InviteModal = ({open, setOpen}: InviteModalProps) => {
     return (
-        <div>
-            Invite Modal
-        </div>
+        <Dialog open={open} onOpenChange={setOpen}>
+            <DialogContent>
+                <DialogHeader>
+                    <DialogTitle>Invite user</DialogTitle>
+                </DialogHeader>
+            </DialogContent>
+        </Dialog>
     )
 }

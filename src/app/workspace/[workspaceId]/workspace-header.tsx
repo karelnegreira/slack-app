@@ -23,10 +23,16 @@ interface WorksHeaderProps  {
 
 const WorkspaceHeader = ({workspace, isAdmin} : WorksHeaderProps) => {
     const [preferencesOpen, setPreferencesOpen] = useState(false);
+    const [inviteOpen, setInviteOpen] = useState(false);
 
   return (
     <>
-    <InviteModal />
+    <InviteModal 
+        open={inviteOpen}
+        setOpen={setInviteOpen}
+        name={workspace.name}
+        joinCode={workspace.joinCode}
+    />
     <PreferencesModal open={preferencesOpen} setOpen={setPreferencesOpen} initialValue={workspace.name}/>
         <div className="flex items-center justify-between px-4 h-[49px] gap-0.5">
             <DropdownMenu>
@@ -63,7 +69,7 @@ const WorkspaceHeader = ({workspace, isAdmin} : WorksHeaderProps) => {
                         <DropdownMenuSeparator />
                         <DropdownMenuItem 
                             className="cursor-pointer py-2" 
-                            onClick={() => {}}>
+                            onClick={() => setInviteOpen(true)}>
                                 Invite people to {workspace.name}
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
