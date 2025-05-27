@@ -25,6 +25,9 @@ export const InviteModal = ({open, setOpen, name, joinCode}: InviteModalProps) =
                         Use the code below to invite users to your workspace
                     </DialogDescription>
                 </DialogHeader>
+                <div className="flex flex-col gap-y-4 items-center justify-center py-10">
+                    <p>{joinCode}</p>
+                </div>
             </DialogContent>
         </Dialog>
     )
