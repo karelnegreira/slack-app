@@ -15,12 +15,15 @@ interface InviteModalProps {
     joinCode: string;
 }
 
-export const InviteModal = ({open, setOpen}: InviteModalProps) => {
+export const InviteModal = ({open, setOpen, name, joinCode}: InviteModalProps) => {
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogContent>
                 <DialogHeader>
-                    <DialogTitle>Invite user</DialogTitle>
+                    <DialogTitle>Invite user to {name}</DialogTitle>
+                    <DialogDescription>
+                        Use the code below to invite users to your workspace
+                    </DialogDescription>
                 </DialogHeader>
             </DialogContent>
         </Dialog>
