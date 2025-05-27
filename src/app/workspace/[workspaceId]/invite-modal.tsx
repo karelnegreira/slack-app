@@ -26,7 +26,9 @@ export const InviteModal = ({open, setOpen, name, joinCode}: InviteModalProps) =
                     </DialogDescription>
                 </DialogHeader>
                 <div className="flex flex-col gap-y-4 items-center justify-center py-10">
-                    <p>{joinCode}</p>
+                    <p className="flex flex-col gap-y-4 items-center justify-center py-10 uppercase">
+                        {joinCode}
+                    </p>
                 </div>
             </DialogContent>
         </Dialog>
