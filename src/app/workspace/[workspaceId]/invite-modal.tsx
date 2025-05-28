@@ -13,6 +13,7 @@ import {
 } from '@/components/ui/dialog';
 import { useWorkspaceId } from '@/hooks/use-workspace-id';
 import { useNewJoinCode } from '@/feature/workspaces/api/use-new-join-code';
+import { useConfirm } from '@/hooks/use-confirm';
 
 interface InviteModalProps {
     open: boolean;
@@ -25,9 +26,15 @@ export const InviteModal = ({open, setOpen, name, joinCode}: InviteModalProps) =
 
     const workspaceId = useWorkspaceId();
 
+    const [ConfirmDialog, confirm] = useConfirm("Are you sure?", "This will deactivate the current code!");
+
     const { mutate, isPending } = useNewJoinCode();
 
-    const handleNewCode = () => {
+    const handleNewCode = async () => {
+        const ok = await confirm();
+        
+        if (!ok) return;
+        
         mutate({workspaceId}, {
             onSuccess: () => {
                 toast.success("Invite code regenerated");
@@ -46,6 +53,8 @@ export const InviteModal = ({open, setOpen, name, joinCode}: InviteModalProps) =
     }
 
     return (
+        <>
+        <ConfirmDialog />
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogContent>
                 <DialogHeader>
@@ -74,5 +83,6 @@ export const InviteModal = ({open, setOpen, name, joinCode}: InviteModalProps) =
                 </div>
             </DialogContent>
         </Dialog>
+        </>
     )
 }
