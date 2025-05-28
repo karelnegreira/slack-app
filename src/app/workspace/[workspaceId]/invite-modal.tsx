@@ -55,7 +55,7 @@ export const InviteModal = ({open, setOpen, name, joinCode}: InviteModalProps) =
                     </DialogDescription>
                 </DialogHeader>
                 <div className="flex flex-col gap-y-4 items-center justify-center py-10">
-                    <p className="flex flex-col gap-y-4 items-center justify-center py-10 uppercase">
+                    <p className="text-4xl font-bold tracking-widest uppercase">
                         {joinCode}
                     </p>
                     <Button onClick={handleCopy} variant="ghost" size="sm">
@@ -64,7 +64,7 @@ export const InviteModal = ({open, setOpen, name, joinCode}: InviteModalProps) =
                     </Button>
                 </div>
                 <div className="flex items-center justify-between w-full">
-                    <Button onClick={handleNewCode} variant="outline">
+                    <Button disabled={isPending} onClick={handleNewCode} variant="outline">
                         New code
                         <RefreshCcw className="size-4 ml-2" />
                     </Button>
