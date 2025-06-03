@@ -2,6 +2,8 @@
 
 import Image from "../../../../node_modules/next/image";
 import VerificationInput from 'react-verification-input';
+import { Button } from "@/components/ui/button";
+import Link from "../../../../node_modules/next/link";
 
 const JoinPage = () => {
     return (
@@ -16,10 +18,27 @@ const JoinPage = () => {
                         Enter the workspace code to join
                     </p>
                 </div>
-                <VerificationInput />
+                <VerificationInput 
+                    length={6}
+                    className={{
+                        container: "flex gap-x-2", 
+                        character: "uppercase h-auto rounded-md border border-gray-300 flex items-center justify-center text-lg font-medium text-gray-500",
+                        characterInactive: "bg-muted", 
+                        characterSelected: "bg-white text-black", 
+                        characterFilled: "bg-white text-black" 
+                    }}
+                    autoFocus
+                />
+            </div>
+            <div className="flex gap-x-4">
+                <Button size="lg" variant="outline"  asChild>
+                        <Link href="/">
+                            Go back home
+                        </Link>
+                </Button>
             </div>
         </div>
     );
-}
+};
 
 export default JoinPage;
