@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "../../../../node_modules/next/image";
+import VerificationInput from 'react-verification-input';
 
 const JoinPage = () => {
     return (
@@ -15,6 +16,7 @@ const JoinPage = () => {
                         Enter the workspace code to join
                     </p>
                 </div>
+                <VerificationInput />
             </div>
         </div>
     );
