@@ -4,8 +4,16 @@ import Image from "../../../../node_modules/next/image";
 import VerificationInput from 'react-verification-input';
 import { Button } from "@/components/ui/button";
 import Link from "../../../../node_modules/next/link";
+import { useWorkspaceId } from "@/hooks/use-workspace-id";
+import { useGetworkspace } from "@/feature/workspaces/api/use-get-workspace";
+import { useGetworkspaceInfo } from "@/feature/workspaces/api/use-get-workspace-info";
 
 const JoinPage = () => {
+    
+    const workspaceId = useWorkspaceId();
+
+    const {data, isLoading} = useGetworkspaceInfo({id: workspaceId})
+
     return (
         <div className="h-full flex flex-col gap-y-8 items-center justify-center bg-white p-8 rounded-lg shadow-sm">
             <Image src="/next.svg" width={60} height="60" alt="Logo"/>
@@ -31,7 +39,7 @@ const JoinPage = () => {
                 />
             </div>
             <div className="flex gap-x-4">
-                <Button size="lg" variant="outline"  asChild>
+                <Button size="lg" variant="outline" asChild>
                         <Link href="/">
                             Go back home
                         </Link>
