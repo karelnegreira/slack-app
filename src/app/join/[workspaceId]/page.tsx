@@ -2,10 +2,10 @@
 
 import Image from "../../../../node_modules/next/image";
 import VerificationInput from 'react-verification-input';
+import { Loader } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import Link from "../../../../node_modules/next/link";
 import { useWorkspaceId } from "@/hooks/use-workspace-id";
-import { useGetworkspace } from "@/feature/workspaces/api/use-get-workspace";
 import { useGetworkspaceInfo } from "@/feature/workspaces/api/use-get-workspace-info";
 
 const JoinPage = () => {
@@ -13,6 +13,14 @@ const JoinPage = () => {
     const workspaceId = useWorkspaceId();
 
     const {data, isLoading} = useGetworkspaceInfo({id: workspaceId})
+
+    if (isLoading) {
+        return (
+            <div className="h-full flex items-center justify-center">
+                <Loader className="size-6 animate-spin text-muted-foreground" />
+            </div>
+        );
+    }
 
     return (
         <div className="h-full flex flex-col gap-y-8 items-center justify-center bg-white p-8 rounded-lg shadow-sm">
