@@ -3,15 +3,17 @@
 import Image from "../../../../node_modules/next/image";
 import VerificationInput from 'react-verification-input';
 import { Loader } from 'lucide-react';
-import { Button } from "@/components/ui/button";
+import { useMemo, useEffect } from 'react';
 import Link from "../../../../node_modules/next/link";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
+import { Button } from "@/components/ui/button";
 import { cn } from '@/lib/utils';
 import { useWorkspaceId } from "@/hooks/use-workspace-id";
 import { useGetworkspaceInfo } from "@/feature/workspaces/api/use-get-workspace-info";
 import { useJoin } from "@/feature/workspaces/api/use-join";
+
 
 
 const JoinPage = () => {
@@ -23,6 +25,14 @@ const JoinPage = () => {
     const { mutate, isPending } = useJoin();
 
     const {data, isLoading} = useGetworkspaceInfo({id: workspaceId});
+
+    const isMember = useMemo(() => data?.isMember, [data?.isMember]);
+
+    useEffect(() => {
+        if (isMember) {
+            router.push(`/workspace/${workspaceId}`);
+        }
+    }, [isMember, router, workspaceId]);
 
     const handleComplete = (value: string) => {
         mutate({ workspaceId, joinCode: value }, {
