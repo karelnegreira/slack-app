@@ -5,14 +5,36 @@ import VerificationInput from 'react-verification-input';
 import { Loader } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import Link from "../../../../node_modules/next/link";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+
+import { cn } from '@/lib/utils';
 import { useWorkspaceId } from "@/hooks/use-workspace-id";
 import { useGetworkspaceInfo } from "@/feature/workspaces/api/use-get-workspace-info";
+import { useJoin } from "@/feature/workspaces/api/use-join";
+
 
 const JoinPage = () => {
+
+    const router = useRouter();
     
     const workspaceId = useWorkspaceId();
 
-    const {data, isLoading} = useGetworkspaceInfo({id: workspaceId})
+    const { mutate, isPending } = useJoin();
+
+    const {data, isLoading} = useGetworkspaceInfo({id: workspaceId});
+
+    const handleComplete = (value: string) => {
+        mutate({ workspaceId, joinCode: value }, {
+            onSuccess: (id) => {
+                router.replace(`/workspace/${id}`);
+                toast.success("Workspace joined.");
+            }, 
+            onError: () => {
+                toast.error("Failed to join");
+            }
+        })
+    };
 
     if (isLoading) {
         return (
@@ -35,9 +57,10 @@ const JoinPage = () => {
                     </p>
                 </div>
                 <VerificationInput 
+                    onComplete={handleComplete}
                     length={6}
                     className={{
-                        container: "flex gap-x-2", 
+                        container: cn("flex gap-x-2", isPending && "opacity-50 cursor-not-allowed"),  
                         character: "uppercase h-auto rounded-md border border-gray-300 flex items-center justify-center text-lg font-medium text-gray-500",
                         characterInactive: "bg-muted", 
                         characterSelected: "bg-white text-black", 
