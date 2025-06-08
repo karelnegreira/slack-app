@@ -6,13 +6,14 @@ import { SidebarItem } from "./sidebar-item";
 import { useGetChannels } from "@/feature/channels/api/use-get-channels";
 import { WorkspaceSection } from "./workspace-section";
 import { useGetMembers } from '@/feature/members/api/use-current-members';
+import { useChannelId } from "@/hooks/use-channel-id";
 
 import { AlertTriangle, HashIcon, Loader, MessageSquareText, SendHorizonal } from "lucide-react";
 import { UserItem } from "./user-item";
 import { useCreateChannelModal } from "@/feature/channels/store/use-create-channel-modal";
 
 const WorkspaceSidebar = () => {
-    
+    const channelId = useChannelId();
     const workspaceId = useWorkspaceId();
 
     const [_open, setOpen] = useCreateChannelModal();
@@ -71,6 +72,7 @@ const WorkspaceSidebar = () => {
                                 icon={HashIcon}
                                 label={item.name}
                                 id={item._id}
+                                variant={channelId === item._id ? "active" : "default"}
                             />
                         ))
                     }
