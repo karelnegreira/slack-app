@@ -4,7 +4,7 @@ import { Loader, TriangleAlert } from 'lucide-react';
 
 import { useGetChannel } from "@/feature/channels/api/use-get-channel";
 import { useChannelId } from "@/hooks/use-channel-id";
-import Header from './header';
+import {Header} from './header';
 
 const ChannelIdPage = () => {
      
