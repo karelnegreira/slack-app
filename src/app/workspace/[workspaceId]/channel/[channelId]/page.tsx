@@ -4,6 +4,7 @@ import { Loader, TriangleAlert } from 'lucide-react';
 
 import { useGetChannel } from "@/feature/channels/api/use-get-channel";
 import { useChannelId } from "@/hooks/use-channel-id";
+import Header from './header';
 
 const ChannelIdPage = () => {
      
@@ -19,7 +20,7 @@ const ChannelIdPage = () => {
         );
      }
 
-     if (channel) {
+     if (!channel) {
         return (
             <div className="h-full flex-1 flex flex-col gap-y-2 items-center justify-center">
                 <TriangleAlert className="size-6 text-muted-foreground" />
@@ -31,8 +32,8 @@ const ChannelIdPage = () => {
      }
 
   return (
-    <div>
-      Channel Id page
+    <div className="flex flex-col h-full">
+      <Header channelName={channel.name} />
     </div>
   )
 }
