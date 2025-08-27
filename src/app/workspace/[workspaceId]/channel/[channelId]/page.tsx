@@ -23,7 +23,7 @@ const ChannelIdPage = () => {
      if (!channel) {
         return (
             <div className="h-full flex-1 flex flex-col gap-y-2 items-center justify-center">
-                <TriangleAlert className="size-6 text-muted-foreground" />
+                <TriangleAlert className="size-5 text-muted-foreground" />
                     <span className="text-sm text-muted-foreground">
                         Channel not found
                     </span>
@@ -33,7 +33,7 @@ const ChannelIdPage = () => {
 
   return (
     <div className="flex flex-col h-full">
-      <Header channelName={channel.name} />
+      <Header title={channel.name} />
     </div>
   )
 }
