@@ -1,6 +1,16 @@
 import { Button } from "@/components/ui/button"
 import { FaChevronDown } from 'react-icons/fa';
 
+import {
+  Dialog,
+  DialogContent, 
+  DialogTrigger, 
+  DialogHeader, 
+  DialogTitle, 
+  DialogClose, 
+  DialogFooter, 
+} from '@/components/ui/dialog'; 
+
 interface HeaderProps {
     title: string;
 }
