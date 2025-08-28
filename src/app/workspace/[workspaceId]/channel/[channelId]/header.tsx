@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { FaChevronDown } from 'react-icons/fa';
+import { TrashIcon } from 'lucide-react';
 
 import {
   Dialog,
@@ -45,6 +46,9 @@ export const Header = ( { title } : HeaderProps) => {
                  </div>
                  <p className="text-sm"> # {title} </p>
               </div>
+              <button>
+                <TrashIcon  className="size-4"/>
+              </button>
             </div>
           </DialogContent>
        </Dialog>
