@@ -36,7 +36,15 @@ export const Header = ( { title } : HeaderProps) => {
               </DialogTitle>
             </DialogHeader>
             <div className="px-4 pb-4 flex flex-col gap-y-2">
-
+              <div className="px-5 py-4 bg-white rounded-lg border cursor-pointer hover:bg-gray-50">
+                 <div className="flex items-center justify-between">
+                    <p className="text-sm font-semibold">Channel name</p>
+                      <p className="text-sm text-[#1264a3] hover:underline font-semibold">
+                        Edit 
+                      </p>
+                 </div>
+                 <p className="text-sm"> # {title} </p>
+              </div>
             </div>
           </DialogContent>
        </Dialog>
