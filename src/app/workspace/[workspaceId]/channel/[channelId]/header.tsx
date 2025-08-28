@@ -46,8 +46,11 @@ export const Header = ( { title } : HeaderProps) => {
                  </div>
                  <p className="text-sm"> # {title} </p>
               </div>
-              <button>
+              <button 
+                className="flex items-center gap-x-2 px-5 py-4 bg-white rounded-lg cursor-pointer border hover:bg-gray-50 text-rose-600"
+              >
                 <TrashIcon  className="size-4"/>
+                <p className="text-sm font-semibold">Delete channel</p>
               </button>
             </div>
           </DialogContent>
