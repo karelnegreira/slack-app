@@ -11,12 +11,15 @@ import {
   DialogClose, 
   DialogFooter, 
 } from '@/components/ui/dialog'; 
+import { useState } from "react";
 
 interface HeaderProps {
     title: string;
 }
 
 export const Header = ( { title } : HeaderProps) => {
+  const [editOpen, setEditOpen] = useState(false);
+  
   return (
     <div className="bg-white border-b h-[49px] flex items-center px-4 overflow-hidden ">
       <Dialog>
