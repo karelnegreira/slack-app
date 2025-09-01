@@ -13,6 +13,10 @@ import {
   DialogClose, 
   DialogFooter, 
 } from '@/components/ui/dialog'; 
+import { useChannelId } from "@/hooks/use-channel-id";
+import { useUpdateChannel } from "@/feature/channels/api/use-update-channel";
+import { update } from "../../../../../../convex/workspaces";
+import { toast } from "sonner";
 
 
 
@@ -21,13 +25,32 @@ interface HeaderProps {
 }
 
 export const Header = ( { title } : HeaderProps) => {
+
+  const channelId = useChannelId();
+
   const [value, setValue] = useState(title);
   const [editOpen, setEditOpen] = useState(false);
+
+  const {mutate: updateChannel, isPending: updatingChannel} = useUpdateChannel()
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.replace(/\s+/g, "-").toLowerCase();
     setValue(value);
   }
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    updateChannel({id: channelId, name: value}, {
+      onSuccess: () => {
+        toast.success("Channel updated");
+        setEditOpen(false);
+      }, 
+      onError: () => {
+        toast.error("Failed to update channel");
+      }
+    });
+  };
 
   return (
     <div className="bg-white border-b h-[49px] flex items-center px-4 overflow-hidden ">
@@ -65,7 +88,7 @@ export const Header = ( { title } : HeaderProps) => {
                     <DialogHeader>
                       <DialogTitle>Rename this channel</DialogTitle>
                     </DialogHeader>
-                    <form className="space-y-4">
+                    <form onSubmit={handleSubmit} className="space-y-4">
                       <Input 
                         value={value}
                         disabled={false}
