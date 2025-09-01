@@ -72,6 +72,13 @@ export const Header = ( { title } : HeaderProps) => {
                         placeholder="e. g. plan-budget"
 
                       />
+                      <DialogFooter>
+                        <DialogClose>
+                          <Button>
+                            Cancel
+                          </Button>
+                        </DialogClose>
+                      </DialogFooter>
                     </form>
                   </DialogContent>
               </Dialog>
