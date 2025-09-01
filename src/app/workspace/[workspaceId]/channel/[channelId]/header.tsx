@@ -60,7 +60,7 @@ export const Header = ( { title } : HeaderProps) => {
                     <DialogHeader>
                       <DialogTitle>Rename this channel</DialogTitle>
                     </DialogHeader>
-                    <form>
+                    <form className="space-y-4">
                       <Input 
                         value={value}
                         disabled={false}
@@ -74,10 +74,19 @@ export const Header = ( { title } : HeaderProps) => {
                       />
                       <DialogFooter>
                         <DialogClose>
-                          <Button>
+                          <Button 
+                              variant="outline"
+                              disabled={false}
+                          >
                             Cancel
                           </Button>
                         </DialogClose>
+                        <Button
+                          disabled={false}
+
+                        >
+                          Save
+                        </Button>
                       </DialogFooter>
                     </form>
                   </DialogContent>
