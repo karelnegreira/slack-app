@@ -91,7 +91,7 @@ export const Header = ( { title } : HeaderProps) => {
                     <form onSubmit={handleSubmit} className="space-y-4">
                       <Input 
                         value={value}
-                        disabled={false}
+                        disabled={updatingChannel}
                         onChange={handleChange}
                         required
                         autoFocus
@@ -104,13 +104,13 @@ export const Header = ( { title } : HeaderProps) => {
                         <DialogClose>
                           <Button 
                               variant="outline"
-                              disabled={false}
+                              disabled={updatingChannel}
                           >
                             Cancel
                           </Button>
                         </DialogClose>
                         <Button
-                          disabled={false}
+                          disabled={updatingChannel}
 
                         >
                           Save
