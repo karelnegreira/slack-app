@@ -3,11 +3,11 @@ import {v} from 'convex/values';
 
 import { mutation, query } from "./_generated/server";
 import { auth } from "./auth";
+import { createContext } from 'vm';
 
 export const update = mutation({
-    args: { id: v.id("channel"),
-    workspaceId: v.id("workspaces"), 
-    name: v.string()
+    args: { id: v.id("channels"), 
+    name: v.string(), 
 }, 
     handler: async (ctx, args) => {
         const userId = await auth.getUserId(ctx);
@@ -16,11 +16,17 @@ export const update = mutation({
             return [];
         }
 
+        const channel = await ctx.db.get(args.id);
+
+        if (!channel) {
+            throw new Error("Channel not found")
+        }
+
         const member = await ctx
             .db
             .query("members")
             .withIndex("by_workspace_id_user_id",
-            (q: any) => q.eq("workspaceId", args.workspaceId)
+            (q: any) => q.eq("workspaceId", channel.workspaceId)
             .eq("userId", userId)
         )
             .unique();
