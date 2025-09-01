@@ -24,6 +24,11 @@ export const Header = ( { title } : HeaderProps) => {
   const [value, setValue] = useState(title);
   const [editOpen, setEditOpen] = useState(false);
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value.replace(/\s+/g, "-").toLowerCase();
+    setValue(value);
+  }
+
   return (
     <div className="bg-white border-b h-[49px] flex items-center px-4 overflow-hidden ">
       <Dialog>
@@ -64,7 +69,7 @@ export const Header = ( { title } : HeaderProps) => {
                       <Input 
                         value={value}
                         disabled={false}
-                        onChange={() => {}}
+                        onChange={handleChange}
                         required
                         autoFocus
                         minLength={3}
