@@ -13,6 +13,14 @@ import {
   DialogClose, 
   DialogFooter, 
 } from '@/components/ui/dialog'; 
+import { useChannelId } from "@/hooks/use-channel-id";
+import { useUpdateChannel } from "@/feature/channels/api/use-update-channel";
+import { update } from "../../../../../../convex/workspaces";
+import { toast } from "sonner";
+import { useRemoveChannel } from "@/feature/channels/api/use-remove-channel";
+import { useConfirm } from "@/hooks/use-confirm";
+import { useRouter } from "next/navigation";
+import { useWorkspaceId } from "@/hooks/use-workspace-id";
 
 
 
@@ -21,17 +29,60 @@ interface HeaderProps {
 }
 
 export const Header = ( { title } : HeaderProps) => {
+
+  const router = useRouter()
+  const channelId = useChannelId();
+  const workspaceId = useWorkspaceId();
+
+  const [ConfirmDialog, confirm] = useConfirm("Delete this channel?", 
+                "You are about to delete this channel. This is irreversible");
+  
+
   const [value, setValue] = useState(title);
   const [editOpen, setEditOpen] = useState(false);
+
+  const {mutate: updateChannel, isPending: updatingChannel} = useUpdateChannel()
+  const {mutate: removeChannel, isPending: isRemovingChannel} = useRemoveChannel()
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.replace(/\s+/g, "-").toLowerCase();
     setValue(value);
   }
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    updateChannel({id: channelId, name: value}, {
+      onSuccess: () => {
+        toast.success("Channel updated");
+        setEditOpen(false);
+      }, 
+      onError: () => {
+        toast.error("Failed to update channel");
+      }
+    });
+  };
+
+  const handleDelete = async() => {
+    const ok = await confirm();
+
+    if (!ok) return;
+
+    removeChannel({id: channelId}, {
+      onSuccess: () => {
+        toast.success("Channel deleted");
+        router.push(`/workspace/${workspaceId}`)
+      }, 
+      onError: () => {
+        toast.error("Failed to delete channel");  
+      }
+    })
+  }
+
   return (
     <div className="bg-white border-b h-[49px] flex items-center px-4 overflow-hidden ">
       <Dialog>
+        <ConfirmDialog />
         <DialogTrigger asChild>
             <Button
                   variant="ghost"
@@ -65,10 +116,10 @@ export const Header = ( { title } : HeaderProps) => {
                     <DialogHeader>
                       <DialogTitle>Rename this channel</DialogTitle>
                     </DialogHeader>
-                    <form className="space-y-4">
+                    <form onSubmit={handleSubmit} className="space-y-4">
                       <Input 
                         value={value}
-                        disabled={false}
+                        disabled={updatingChannel}
                         onChange={handleChange}
                         required
                         autoFocus
@@ -81,13 +132,13 @@ export const Header = ( { title } : HeaderProps) => {
                         <DialogClose>
                           <Button 
                               variant="outline"
-                              disabled={false}
+                              disabled={updatingChannel}
                           >
                             Cancel
                           </Button>
                         </DialogClose>
                         <Button
-                          disabled={false}
+                          disabled={updatingChannel}
 
                         >
                           Save
@@ -97,6 +148,8 @@ export const Header = ( { title } : HeaderProps) => {
                   </DialogContent>
               </Dialog>
               <button 
+                onClick={handleDelete}
+                disabled={isRemovingChannel}
                 className="flex items-center gap-x-2 px-5 py-4 bg-white rounded-lg cursor-pointer border hover:bg-gray-50 text-rose-600"
               >
                 <TrashIcon  className="size-4"/>
