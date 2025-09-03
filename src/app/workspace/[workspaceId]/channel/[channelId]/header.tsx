@@ -21,6 +21,7 @@ import { useRemoveChannel } from "@/feature/channels/api/use-remove-channel";
 import { useConfirm } from "@/hooks/use-confirm";
 import { useRouter } from "next/navigation";
 import { useWorkspaceId } from "@/hooks/use-workspace-id";
+import { useCurrentMember } from "@/feature/members/api/use-current-member";
 
 
 
@@ -40,6 +41,8 @@ export const Header = ( { title } : HeaderProps) => {
 
   const [value, setValue] = useState(title);
   const [editOpen, setEditOpen] = useState(false);
+
+  const {data: member} = useCurrentMember({workspaceId});
 
   const {mutate: updateChannel, isPending: updatingChannel} = useUpdateChannel()
   const {mutate: removeChannel, isPending: isRemovingChannel} = useRemoveChannel()
