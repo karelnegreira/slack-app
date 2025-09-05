@@ -25,7 +25,7 @@ const WorkspaceSidebar = () => {
 
     if (workspaceLoading || memberLoading) {
         return (
-            <div className="flex flex-col bg-[#5E2C5F] h-full items-center justify-center">
+            <div className="flex flex-col bg-[#5E2C5F] h-full items-start justify-center">
                 <Loader className="size-5 animate-spin text-white"/>
             </div>
         );
