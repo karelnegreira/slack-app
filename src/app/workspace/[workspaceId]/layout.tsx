@@ -19,7 +19,7 @@ const WorkspaceIdLayout = ({children}: WorkspaceIdLayoutProps) => {
         <div className="flex h-[calc(100vh-40px)]">
           <Sidebar />
           <ResizablePanelGroup direction="horizontal" autoSaveId="ca-workspace-layout">
-            <ResizablePanel defaultSize={20} minSize={5} className="bg-[#5E2C5F]">
+            <ResizablePanel defaultSize={5} minSize={5} className="bg-[#5E2C5F]">
               <div>
                 {
                   //something to be added in header here....
