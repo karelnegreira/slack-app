@@ -1,9 +1,9 @@
-
+import Editor from '@/components/editor';
 
 const ChatInput = () => {
   return (
-    <div>
-      Chat input 
+    <div className="px-5 w-full">
+      <Editor /> 
     </div>
   )
 }
