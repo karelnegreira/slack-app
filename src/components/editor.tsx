@@ -32,7 +32,7 @@ const Editor = () => {
   return (
     <div className="flex flex-col">
       <div className="flex flex-col border border-slate-300 rounded-md overflow-hidden focus-within:border-slate-400 focus-within:shadow-sm transition bg-white">
-        <div ref={containerRef}/>
+        <div ref={containerRef} className="h-full ql-custom"/>
       </div>
     </div>
   )
