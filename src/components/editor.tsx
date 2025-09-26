@@ -1,12 +1,33 @@
 
 
-import Quill from 'quill';
+import Quill, {type QuillOptions} from 'quill';
 
 import "quill/dist/quill.snow.css"; 
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 const Editor = () => {
-    const containerRef = useRef();
+    const containerRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (!containerRef.current) return;
+
+        const container = containerRef.current;
+        const editorContainer = container.appendChild(
+            container.ownerDocument.createElement("div"),
+        );
+
+        const options: QuillOptions = {
+            theme: "snow", 
+        };
+
+        new Quill(editorContainer, options);
+
+        return () => {
+            if (container) {
+                container.innerHTML = ""
+            }
+        }
+    }, []);
     
   return (
     <div className="flex flex-col">
