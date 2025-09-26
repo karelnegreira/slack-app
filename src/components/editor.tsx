@@ -77,14 +77,36 @@ const Editor = ({ variant = "create" }: EditorProps) => {
                     </Button>
             </Hint>
             )}
+            {variant === 'update' && (
+                <div className="ml-auto flex items-center gap-x-2">
+                    <Button 
+                        variant="outine"
+                        size="sm"
+                        onClick={() => {}}
+                        disabled={false}
+                    >
+                        Cancel
+                    </Button>
+                    <Button
+                        disabled={false}
+                        onClick={() => {}}
+                        size="sm"
+                        className="bg-[#007a5a] hover:bg-[#007a5a]/80 text-white"
+                    >
+                        Save
+                    </Button>
+                </div>
+            )}
+            {variant === 'create' && (
+                <Button 
+                    disabled={false}
+                    onClick={() => {}}
+                    size="iconSm"
+                    className="ml-auto bg-[#007a5a] hover:bg-[#007a5a]/80 text-white">
+                    <MdSend className="size-4" />
+                </Button>
+            )}
             
-            <Button 
-                disabled={false}
-                onClick={() => {}}
-                size="iconSm"
-                className="ml-auto bg-[#007a5a] hover:bg-[#007a5a]/80 text-white">
-                <MdSend className="size-4" />
-            </Button>
         </div>
       </div>
         <div className="p-2 text-[10px] text-muted-foreground flex justify-end">
