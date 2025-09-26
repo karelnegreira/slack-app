@@ -5,12 +5,25 @@ import { useEffect, useRef } from 'react';
 import { Hint } from './hint';
 import { Button } from './ui/button';
 
+
 import Quill, {type QuillOptions} from 'quill';
+import {Delta, Op} from "quill/core";
 import "quill/dist/quill.snow.css"; 
 
+type EditorValue = {
+    image: File | null;
+    body: string;
+}
+
 interface EditorProps {
+    onSubmit: ({image, body}: EditorValue) => void;
+    onCancel?: () => void;
+    placeholder?: string;
+    defaultValue?: Delta | Op[];
     variant?: "create" | "update";
 };
+
+
 
 const Editor = ({ variant = "create" }: EditorProps) => {
 
