@@ -5,6 +5,7 @@ import "quill/dist/quill.snow.css";
 
 import {PiTextAa} from 'react-icons/pi';
 import {Smile, ImageIcon} from 'lucide-react';
+import {MdSend} from 'react-icons/md';
 import { useEffect, useRef } from 'react';
 
 import { Button } from './ui/button';
@@ -64,6 +65,9 @@ const Editor = () => {
             >
                 <ImageIcon className="size-4"/>
                 
+            </Button>
+            <Button>
+                <MdSend />
             </Button>
         </div>
       </div>
