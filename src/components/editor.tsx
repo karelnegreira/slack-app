@@ -66,8 +66,8 @@ const Editor = () => {
                 <ImageIcon className="size-4"/>
                 
             </Button>
-            <Button>
-                <MdSend />
+            <Button className="ml-auto bg-[#007a5a] hover:bg-[#007a5a]/80 text-white">
+                <MdSend className="size-4" />
             </Button>
         </div>
       </div>
