@@ -1,17 +1,19 @@
-
-
-import Quill, {type QuillOptions} from 'quill';
-import "quill/dist/quill.snow.css"; 
-
 import {PiTextAa} from 'react-icons/pi';
 import {Smile, ImageIcon} from 'lucide-react';
 import {MdSend} from 'react-icons/md';
 import { useEffect, useRef } from 'react';
 import { Hint } from './hint';
-
 import { Button } from './ui/button';
 
-const Editor = () => {
+import Quill, {type QuillOptions} from 'quill';
+import "quill/dist/quill.snow.css"; 
+
+interface EditorProps {
+    variant?: "create" | "update";
+};
+
+const Editor = ({ variant = "create" }: EditorProps) => {
+
     const containerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -62,17 +64,20 @@ const Editor = () => {
                     
                 </Button>
             </Hint>
-            <Hint label="Image">
-                <Button
-                    disabled={false}
-                    size="iconSm"
-                    variant="ghost"
-                    onClick={() => {} }
-                >
-                    <ImageIcon className="size-4"/>
-                    
-                </Button>
+            {variant === 'create' && (
+                <Hint label="Image">
+                    <Button
+                        disabled={false}
+                        size="iconSm"
+                        variant="ghost"
+                        onClick={() => {} }
+                    >
+                        <ImageIcon className="size-4"/>
+                        
+                    </Button>
             </Hint>
+            )}
+            
             <Button 
                 disabled={false}
                 onClick={() => {}}
@@ -82,7 +87,13 @@ const Editor = () => {
             </Button>
         </div>
       </div>
+        <div className="p-2 text-[10px] text-muted-foreground flex justify-end">
+            <p>
+                <strong>Shift + Return</strong> to add a new line 
+            </p>
+        </div>
     </div>
+    
   )
 }
 
