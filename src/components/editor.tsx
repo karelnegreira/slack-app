@@ -1,7 +1,7 @@
 import {PiTextAa} from 'react-icons/pi';
 import {Smile, ImageIcon} from 'lucide-react';
 import {MdSend} from 'react-icons/md';
-import { useEffect, useRef } from 'react';
+import { MutableRefObject, useEffect, useLayoutEffect, useRef } from 'react';
 import { Hint } from './hint';
 import { Button } from './ui/button';
 
@@ -20,14 +20,34 @@ interface EditorProps {
     onCancel?: () => void;
     placeholder?: string;
     defaultValue?: Delta | Op[];
+    disabled?: boolean;
+    innerRef?: MutableRefObject<Quill | null>;
     variant?: "create" | "update";
 };
 
 
 
-const Editor = ({ variant = "create" }: EditorProps) => {
+const Editor = ({onSubmit, 
+                onCancel, 
+                placeholder="text here", 
+                defaultValue = [], 
+                disabled = false,
+                innerRef,
+                variant = "create" }: EditorProps) => {
 
+    const submitRef = useRef(onSubmit);
+    const placeholderRef = useRef(placeholder);
+    const quillRef = useRef<Quill | null>(null);
+    const defaultValueRef = useRef(defaultValue);
     const containerRef = useRef<HTMLDivElement>(null);
+    const disabledRef = useRef(disabled);
+
+    useLayoutEffect(() => {
+       submitRef.current = onSubmit;
+       placeholderRef.current = placeholder;
+       defaultValueRef.current = defaultValue;
+       disabledRef.current = disabled; 
+    });
 
     useEffect(() => {
         if (!containerRef.current) return;
@@ -39,6 +59,7 @@ const Editor = ({ variant = "create" }: EditorProps) => {
 
         const options: QuillOptions = {
             theme: "snow", 
+            placeholder: placeholderRef.current, 
         };
 
         new Quill(editorContainer, options);
