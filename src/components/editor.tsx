@@ -72,9 +72,23 @@ const Editor = ({onSubmit,
             innerRef.current = quill;
         }
 
+        quill.setContents(defaultValueRef.current);
+        setText(quill.getText());
+
+        quill.on(Quill.events.TEXT_CHANGE, () => {
+            setText(quill.getText());
+        });
+
         return () => {
+            quill.off(Quill.events.TEXT_CHANGE);
             if (container) {
                 container.innerHTML = ""
+            }
+            if (quillRef.current) {
+                quillRef.current = null;
+            }
+            if (innerRef) {
+                innerRef.current = null;
             }
         }
     }, [innerRef]);
