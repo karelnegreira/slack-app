@@ -1,7 +1,7 @@
 import {PiTextAa} from 'react-icons/pi';
 import {Smile, ImageIcon} from 'lucide-react';
 import {MdSend} from 'react-icons/md';
-import { MutableRefObject, useEffect, useLayoutEffect, useRef } from 'react';
+import { MutableRefObject, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Hint } from './hint';
 import { Button } from './ui/button';
 
@@ -35,6 +35,8 @@ const Editor = ({onSubmit,
                 innerRef,
                 variant = "create" }: EditorProps) => {
 
+    const [text, setText] = useState("");
+
     const submitRef = useRef(onSubmit);
     const placeholderRef = useRef(placeholder);
     const quillRef = useRef<Quill | null>(null);
@@ -62,14 +64,20 @@ const Editor = ({onSubmit,
             placeholder: placeholderRef.current, 
         };
 
-        new Quill(editorContainer, options);
+        const quill = new Quill(editorContainer, options);
+        quillRef.current = quill;
+        quillRef.current.focus();
+
+        if (innerRef) {
+            innerRef.current = quill;
+        }
 
         return () => {
             if (container) {
                 container.innerHTML = ""
             }
         }
-    }, []);
+    }, [innerRef]);
     
   return (
     <div className="flex flex-col">
