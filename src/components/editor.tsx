@@ -63,6 +63,18 @@ const Editor = ({onSubmit,
         const options: QuillOptions = {
             theme: "snow", 
             placeholder: placeholderRef.current, 
+            modules: {
+                keyboard: {
+                    bindings: {
+                        enter: {
+                            key: "Enter", 
+                            handler: () => {
+                                return;
+                            }
+                        }
+                    }
+                },
+            },
         };
 
         const quill = new Quill(editorContainer, options);
