@@ -69,10 +69,18 @@ const Editor = ({onSubmit,
                         enter: {
                             key: "Enter", 
                             handler: () => {
+                                //TODO submit form
                                 return;
                             }
-                        }
-                    }
+                        }, 
+                        shift_enter: {
+                            key: "Enter", 
+                            shiftKey: true, 
+                            handler: () => {
+                                quill.insertText(quill.getSelection()?.index || 0, "\n");
+                            }
+                        },
+                    },
                 },
             },
         };
