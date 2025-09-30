@@ -92,6 +92,10 @@ const Editor = ({onSubmit,
             }
         }
     }, [innerRef]);
+
+    const isEmpty = text.replace(/<(.|\n)*?>/g, "").trim().length === 0;
+
+    console.log({ isEmpty, text });
     
   return (
     <div className="flex flex-col">
@@ -155,7 +159,7 @@ const Editor = ({onSubmit,
             )}
             {variant === 'create' && (
                 <Button 
-                    disabled={false}
+                    disabled={disabled || isEmpty}
                     onClick={() => {}}
                     size="iconSm"
                     className="ml-auto bg-[#007a5a] hover:bg-[#007a5a]/80 text-white">
