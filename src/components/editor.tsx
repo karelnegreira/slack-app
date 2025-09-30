@@ -9,6 +9,7 @@ import { Button } from './ui/button';
 import Quill, {type QuillOptions} from 'quill';
 import {Delta, Op} from "quill/core";
 import "quill/dist/quill.snow.css"; 
+import { cn } from '@/lib/utils';
 
 type EditorValue = {
     image: File | null;
@@ -162,7 +163,13 @@ const Editor = ({onSubmit,
                     disabled={disabled || isEmpty}
                     onClick={() => {}}
                     size="iconSm"
-                    className="ml-auto bg-[#007a5a] hover:bg-[#007a5a]/80 text-white">
+                    className={
+                        cn("ml-auto",
+                        isEmpty
+                        ? "bg-white hover:bg-white text-muted-foreground"
+                        :"bg-[#007a5a] hover:bg-[#007a5a]/80 text-white"
+                    )}
+                    >
                     <MdSend className="size-4" />
                 </Button>
             )}
