@@ -10,6 +10,7 @@ import Quill, {type QuillOptions} from 'quill';
 import {Delta, Op} from "quill/core";
 import "quill/dist/quill.snow.css"; 
 import { cn } from '@/lib/utils';
+import { EmojiProvider } from './emoji-popover';
 
 type EditorValue = {
     image: File | null;
@@ -149,7 +150,7 @@ const Editor = ({onSubmit,
                     
                 </Button>
             </Hint>
-            <Hint label="Emoji">
+            <EmojiProvider onEmojiSelect={() => {}}>
                 <Button
                     disabled={disabled}
                     size="iconSm"
@@ -159,7 +160,7 @@ const Editor = ({onSubmit,
                     <Smile className="size-4"/>
                     
                 </Button>
-            </Hint>
+            </EmojiProvider>
             {variant === 'create' && (
                 <Hint label="Image">
                     <Button

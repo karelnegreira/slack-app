@@ -2,6 +2,8 @@ import dynamic from 'next/dynamic';
 import Quill from 'quill';
 import { useRef } from 'react';
 
+import { EmojiProvider } from '@/components/emoji-popover';
+
 
 const Editor = dynamic(() => import("@/components/editor"), {ssr: false});
 
