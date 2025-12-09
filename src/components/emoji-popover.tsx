@@ -32,6 +32,15 @@ export const EmojiProvider  = ({
     const [popoverOpen, setPopoverOpen] = useState(false);
     const [tooltipOpen, setTooltipOpen] = useState(false);
 
+    const onSelect = (emoji: any) => {
+        onEmojiSelect(emoji);
+        setTooltipOpen(false);
+
+        setTimeout(() => {
+            setTooltipOpen(false);
+        }, 500);
+    };
+
 
     return (
         <TooltipProvider>
@@ -51,7 +60,7 @@ export const EmojiProvider  = ({
                         </TooltipContent>
                     </Tooltip>
                 <PopoverContent className="p-0 w-full border-none shadow-none">
-                    <Picker data={data} onEmojiSelect={(x) => {console.log(x)}}/>
+                    <Picker data={data} onEmojiSelect={onSelect}/>
                 </PopoverContent>
             </Popover> 
         </TooltipProvider>
