@@ -10,7 +10,7 @@ import Quill, {type QuillOptions} from 'quill';
 import {Delta, Op} from "quill/core";
 import "quill/dist/quill.snow.css"; 
 import { cn } from '@/lib/utils';
-import { EmojiProvider } from './emoji-popover';
+import  {EmojiPopover}  from './emoji-popover';
 
 type EditorValue = {
     image: File | null;
@@ -130,6 +130,11 @@ const Editor = ({onSubmit,
         }
     };
 
+    const onEmojiSelect = (emoji: any) => {
+        const quill = quillRef.current;
+        quill?.insertText(quill?.getSelection()?.index || 0, emoji.native);
+    }
+
     const isEmpty = text.replace(/<(.|\n)*?>/g, "").trim().length === 0;
 
     console.log({ isEmpty, text });
@@ -150,12 +155,12 @@ const Editor = ({onSubmit,
                     
                 </Button>
             </Hint>
-            <EmojiProvider onEmojiSelect={() => {}}>
+            <EmojiPopover onEmojiSelect={() => {}}>
                 <Button
                     disabled={disabled}
                     size="iconSm"
                     variant="ghost"
-                    onClick={() => {} }
+                    onClick={onEmojiSelect}
                 >
                     <Smile className="size-4"/>
                     

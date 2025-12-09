@@ -23,7 +23,7 @@ interface EmojiPopoverProps {
     onEmojiSelect: (emoji: any) => void;
 };
 
-export const EmojiProvider  = ({
+export const EmojiPopover  = ({
     children, 
     hint="emoji", 
     onEmojiSelect,
@@ -31,6 +31,8 @@ export const EmojiProvider  = ({
 
     const [popoverOpen, setPopoverOpen] = useState(false);
     const [tooltipOpen, setTooltipOpen] = useState(false);
+
+    
 
     const onSelect = (emoji: any) => {
         onEmojiSelect(emoji);
@@ -40,6 +42,8 @@ export const EmojiProvider  = ({
             setTooltipOpen(false);
         }, 500);
     };
+
+    
 
 
     return (
